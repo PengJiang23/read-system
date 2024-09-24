@@ -4,6 +4,7 @@ package com.heima.apis.article;
 import com.heima.apis.article.fallback.IArticleClientFallback;
 import com.heima.model.article.dtos.ArticleCommentDto;
 import com.heima.model.article.dtos.ArticleDto;
+import com.heima.model.article.dtos.CollectionBehaviorDto;
 import com.heima.model.article.pojos.ApArticle;
 import com.heima.model.comment.dtos.CommentConfigDto;
 import com.heima.model.common.dtos.PageResponseResult;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(value = "leadnews-article", fallback = IArticleClientFallback.class)
+@FeignClient(value = "leadnews-article",contextId = "IArticle", fallback = IArticleClientFallback.class)
 public interface IArticleClient {
 
     @PostMapping("/api/v1/article/save")
@@ -39,4 +40,6 @@ public interface IArticleClient {
 
     @PostMapping("/api/v1/article/newPage")
     PageResponseResult newPage(@RequestBody StatisticsDto dto);
+
+
 }

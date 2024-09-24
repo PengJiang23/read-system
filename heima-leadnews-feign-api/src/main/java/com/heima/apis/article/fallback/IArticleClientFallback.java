@@ -3,12 +3,14 @@ package com.heima.apis.article.fallback;
 import com.heima.apis.article.IArticleClient;
 import com.heima.model.article.dtos.ArticleCommentDto;
 import com.heima.model.article.dtos.ArticleDto;
+import com.heima.model.article.dtos.CollectionBehaviorDto;
 import com.heima.model.article.pojos.ApArticle;
 import com.heima.model.comment.dtos.CommentConfigDto;
 import com.heima.model.common.dtos.PageResponseResult;
 import com.heima.model.common.dtos.ResponseResult;
 import com.heima.model.common.enums.AppHttpCodeEnum;
 import com.heima.model.wemedia.dtos.StatisticsDto;
+import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -49,4 +51,5 @@ public class IArticleClientFallback implements IArticleClient {
     public PageResponseResult newPage(StatisticsDto dto) {
         return null;
     }
+
 }

@@ -13,6 +13,7 @@ import com.heima.article.service.ApArticleConfigService;
 import com.heima.article.service.ApArticleService;
 import com.heima.model.article.dtos.ArticleCommentDto;
 import com.heima.model.article.dtos.ArticleDto;
+import com.heima.model.article.dtos.CollectionBehaviorDto;
 import com.heima.model.article.pojos.ApArticle;
 import com.heima.model.article.pojos.ApArticleConfig;
 import com.heima.model.article.vos.ArticleCommnetVo;
@@ -105,4 +106,5 @@ public class ArticleClient implements IArticleClient {
 
         return apArticleService.newPage(dto);
     }
+
 }
