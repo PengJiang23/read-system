@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>heima-leadnews-service</artifactId>
+        <groupId>com.heima</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>heima-leadnews-article</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <!--        docker-->
+        <docker.image>docker_storage</docker.image>
+
+    </properties>
+
+    <!--    build-->
+    <build>
+        <finalName>heima-leadnews-article</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.39.0</version>
+                <configuration>
+                    <!-- 指定 Dockerfile 路径 -->
+<!--                    <dockerFile>${project.basedir}/Dockerfile</dockerFile>-->
+                    <!-- 镜像名称，使用本地镜像 -->
+                    <images>
+                        <image>
+                            <name>${docker.image}/${project.artifactId}</name>
+                            <build>
+                                <!-- 从本地镜像仓库拉取基础镜像 -->
+                                <from>openjdk:8</from> <!-- 例如：my-local-image:latest -->
+                                <args>
+                                    <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                                </args>
+
+                                <noCache>true</noCache>
+                            </build>
+                        </image>
+                    </images>
+                    <!-- 禁止从 Docker Hub 或远程仓库拉取 -->
+<!--                    <skipPull>true</skipPull>-->
+
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+
+    <dependencies>
+        <!--        freemaker-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+        <!--        自定义的minio封装的模块-->
+        <dependency>
+            <groupId>com.heima</groupId>
+            <artifactId>heima-file-starter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+
+<!--        ocr识别-->
+        <dependency>
+            <groupId>net.sourceforge.tess4j</groupId>
+            <artifactId>tess4j</artifactId>
+            <version>4.1.1</version>
+        </dependency>
+
+        <!--xxl-job-->
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

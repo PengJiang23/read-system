@@ -1,0 +1,11 @@
+### GET request to example server
+POST http://localhost:51601/user/api/v1/login/login_auth?phone=13511223456&password=admin
+Content-Type: application/json
+
+{
+  "phone": "13511223456",
+  "password": "admin"
+}
+
+
+###

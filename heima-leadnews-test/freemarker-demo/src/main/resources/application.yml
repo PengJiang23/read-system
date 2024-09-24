@@ -1,0 +1,11 @@
+server:
+  port: 8881
+spring:
+  application:
+    name: freemarker-demo
+  freemarker:
+    cache: false
+    settings:
+      template_update_delay: 0  #检查模板更新延迟时间，设置为0表示立即检查，如果时间大于0会有缓存不方便进行模板测试
+    suffix: .ftl
+    template-loader-path: classpath:/templates   #模板存放位置

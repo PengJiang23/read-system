@@ -1,0 +1,3 @@
+# todo class to spring bean container
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.heima.file.service.impl.MinIOFileStorageService
